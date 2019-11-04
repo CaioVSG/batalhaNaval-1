@@ -1,15 +1,25 @@
 import Phaser from 'phaser'
 import WebFont from 'webfontloader'
-import config from '../config';
+import config from '../config'
+import globals from './globals/variaveis'
+import { clone } from 'lodash'
 
 export default class extends Phaser.State {
-  init() {
-    this.stage.backgroundColor = '#EDEEC9'
+  init () {
+    this.stage.backgroundColor = '#000000'
     this.fontsReady = false
     this.fontsLoaded = this.fontsLoaded.bind(this)
   }
 
-  preload() {
+  create (){
+    this.initVariaveisGlobais()
+  }
+
+  initVariaveisGlobais(){
+    this.game.global = clone(globals)
+  }
+
+  preload () {
     if (config.webfonts.length) {
       WebFont.load({
         google: {
@@ -24,9 +34,13 @@ export default class extends Phaser.State {
 
     this.load.image('loaderBg', './assets/images/loader-bg.png')
     this.load.image('loaderBar', './assets/images/loader-bar.png')
+
+    this.load.image('cruiser', './assets/images/B1.png')
+    this.load.image('water', './assets/images/water1.png')
+
   }
 
-  render() {
+  render () {
     if (config.webfonts.length && this.fontsReady) {
       this.state.start('Splash')
     }
@@ -35,7 +49,7 @@ export default class extends Phaser.State {
     }
   }
 
-  fontsLoaded() {
+  fontsLoaded () {
     this.fontsReady = true
   }
 }

@@ -1,36 +1,46 @@
-/* globals __DEV__ */
 import Phaser from 'phaser'
-import Mushroom from '../sprites/Mushroom'
-import lang from '../lang'
+import Water from '../prefabs/water.js'
+import Barco from '../prefabs/barco.js'
 
 export default class extends Phaser.State {
-  init() { }
-  preload() { }
-
-  create() {
-    const bannerText = lang.text('welcome')
-    let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText, {
-      font: '40px Bangers',
-      fill: '#77BFA3',
-      smoothed: false
-    })
-
-    banner.padding.set(10, 16)
-    banner.anchor.setTo(0.5)
-
-    this.mushroom = new Mushroom({
-      game: this.game,
-      x: this.world.centerX,
-      y: this.world.centerY,
-      asset: 'mushroom'
-    })
-
-    this.game.add.existing(this.mushroom)
+  init () { }
+  preload () { }
+  create () {
+    this.createWater()
+    this.createBarco()
   }
 
-  render() {
-    if (__DEV__) {
-      this.game.debug.spriteInfo(this.mushroom, 32, 32)
+  createWater(){
+    this.waters = this.game.add.group()
+    this.generateWater(this.waters, 100, 100)
+    this.generateWater(this.waters, 900, 100)
+  }
+
+  generateWater(waterGroup, comecoX, comecoY){
+    let water
+
+    for(var x = comecoX; x < comecoX+610; x+= 61){
+      for(var y = comecoY; y < comecoY+610; y+= 61){
+        water = new Water(this.game, x, y)
+        waterGroup.add(water)
+      }
     }
+    return waterGroup
   }
+
+  createBarco(){
+    this.barcos = this.game.add.group()
+    this.generateBarcos(this.barcos)
+  }
+
+  generateBarcos(){
+
+  }
+
+  setUpText(){
+  }
+  render () {
+
+  }
+
 }
