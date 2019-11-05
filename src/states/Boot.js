@@ -32,11 +32,20 @@ export default class extends Phaser.State {
     let text = this.add.text(this.world.centerX, this.world.centerY, 'loading fonts', { font: '16px Arial', fill: '#dddddd', align: 'center' })
     text.anchor.setTo(0.5, 0.5)
 
+    //gameLoader
     this.load.image('loaderBg', './assets/images/loader-bg.png')
     this.load.image('loaderBar', './assets/images/loader-bar.png')
 
-    this.load.image('cruiser', './assets/images/B1.png')
-    this.load.image('water', './assets/images/water1.png')
+    //Barcos
+    this.load.image('cruiser', './assets/images/cruiser.png')
+    this.load.image('battleship', './assets/images/battleship.png')
+    this.load.image('carrier', './assets/images/carrier.png')
+    this.load.image('submarine', './assets/images/submarine.png')
+    this.load.image('destroyer', './assets/images/destroyer.png')
+
+    //water
+    this.load.image('water', './assets/images/water.png')
+
 
   }
 
