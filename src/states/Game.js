@@ -11,21 +11,16 @@ export default class extends Phaser.State {
 
   create () {
     this.createWater()
+    this.createBarco('battleship')
   }
 
   createWater(){
     this.watersPlayer = this.game.add.group()
-    this.watersIA = this.game.add.group()
-    this.generateWater(this.watersPlayer, 275, 10)
-    //this.generateWater(this.watersIA, 900, 100)
-    this.createBarco('battleship', 'battleship')
-  }
+    this.generateWater(this.watersPlayer, 275, 10)}
 
-  createBarco(nomeBarco1, nomeBarco2){
+  createBarco(nomeBarco1){
     this.barco = new Barco(this.game, 50, 100, nomeBarco1)
-    this.barco2 = new Barco(this.game,50, 400, nomeBarco2)
     this.game.add.existing(this.barco)
-    this.game.add.existing(this.barco2)
 
   }
 
@@ -43,8 +38,6 @@ export default class extends Phaser.State {
 
   update(){
     this.game.physics.arcade.collide(this.barco, this.watersPlayer, this.colisaoHandler, null, this)
-    this.game.physics.arcade.collide(this.barco, this.barco2, this.colisaoHandlerBarco, null, this)
-
   }
 
   colisaoHandler(){
